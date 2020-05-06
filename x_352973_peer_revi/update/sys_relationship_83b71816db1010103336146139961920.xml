@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_relationship">
+    <sys_relationship action="INSERT_OR_UPDATE">
+        <advanced>false</advanced>
+        <apply_to/>
+        <basic_apply_to>x_352973_peer_revi_user_score</basic_apply_to>
+        <basic_query_from>x_352973_peer_revi_feedback</basic_query_from>
+        <insert_callback/>
+        <name>Feedbacks to User Score</name>
+        <query_from/>
+        <query_with><![CDATA[(function refineQuery(current, parent) {
+     current.addQuery('receiver',parent.user);
+     current.orderByDesc('sys_created_on');
+ })(current, parent);]]></query_with>
+        <reference_field>receiver</reference_field>
+        <related_list/>
+        <simple_reference>false</simple_reference>
+        <sys_class_name>sys_relationship</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-04-22 18:55:50</sys_created_on>
+        <sys_id>83b71816db1010103336146139961920</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Feedbacks to User Score</sys_name>
+        <sys_package display_value="Peer Review" source="x_352973_peer_revi">e9333675db50101033361461399619c9</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Peer Review">e9333675db50101033361461399619c9</sys_scope>
+        <sys_update_name>sys_relationship_83b71816db1010103336146139961920</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-04-22 18:55:50</sys_updated_on>
+    </sys_relationship>
+    <sys_translated_text action="delete_multiple" query="documentkey=83b71816db1010103336146139961920"/>
+</record_update>
