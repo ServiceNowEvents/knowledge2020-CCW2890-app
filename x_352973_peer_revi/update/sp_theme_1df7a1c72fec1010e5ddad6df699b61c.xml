@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_theme">
+    <sp_theme action="INSERT_OR_UPDATE">
+        <css_variables>$gable-green: #293e40;&#13;
+$acapulco: #81b5a1;&#13;
+$cloud: #f7f7f7;&#13;
+$pure-white: #ffffff;&#13;
+$ocean-spray: #72d0e2;&#13;
+$aquamarine: #64ddac;&#13;
+$cruise: #b0e1ce;&#13;
+$light-grey: #F6F7F7;&#13;
+$medium-grey: #797979;</css_variables>
+        <footer/>
+        <footer_fixed>true</footer_fixed>
+        <header/>
+        <name>Peer Review</name>
+        <navbar_fixed>true</navbar_fixed>
+        <sys_class_name>sp_theme</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-05-07 18:57:34</sys_created_on>
+        <sys_id>1df7a1c72fec1010e5ddad6df699b61c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Peer Review</sys_name>
+        <sys_package display_value="Peer Review" source="x_352973_peer_revi">e9333675db50101033361461399619c9</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Peer Review">e9333675db50101033361461399619c9</sys_scope>
+        <sys_update_name>sp_theme_1df7a1c72fec1010e5ddad6df699b61c</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-05-07 18:57:34</sys_updated_on>
+    </sp_theme>
+</record_update>
