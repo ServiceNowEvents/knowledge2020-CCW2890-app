@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_atf_test">
+    <sys_atf_test action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <copied_from/>
+        <description>Test the Peer Review Feedback form.</description>
+        <enable_parameterized_testing>false</enable_parameterized_testing>
+        <name>Submit Peer Review Feedback</name>
+        <parameters/>
+        <remember/>
+        <sys_class_name>sys_atf_test</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-05-07 16:54:54</sys_created_on>
+        <sys_id>a4ab49472fac1010e5ddad6df699b6a5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Submit Peer Review Feedback</sys_name>
+        <sys_package display_value="Peer Review" source="x_352973_peer_revi">e9333675db50101033361461399619c9</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Peer Review">e9333675db50101033361461399619c9</sys_scope>
+        <sys_update_name>sys_atf_test_a4ab49472fac1010e5ddad6df699b6a5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-05-07 16:54:54</sys_updated_on>
+    </sys_atf_test>
+    <sys_variable_value action="delete_multiple" query="document_key=a4ab49472fac1010e5ddad6df699b6a5"/>
+</record_update>
