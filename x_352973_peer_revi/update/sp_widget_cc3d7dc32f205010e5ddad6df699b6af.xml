@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function ScorecardController($uibModal, $scope) {
+  var c = this;
+  c.openFeedbackModal = openFeedbackModal;
+  c.toggleMoreLess = toggleMoreLess;
+
+  c.$onInit = function() {
+    activateEventListener();
+    c.maxDisplayLength = 125;
+  };
+
+  function activateEventListener() {
+    $scope.$on('peer_feedback_close', function(e) {
+      handleFeedbackClose(e);
+    });
+  }
+
+  function handleFeedbackClose(e) {
+    c.modalInstance.close();
+  }
+
+  // open a modal to collect record producer for submitting new feedback
+  function openFeedbackModal() {
+    c.modalInstance = $uibModal.open({
+      templateUrl: 'submitFeedbackModalTemplate',
+      scope: $scope
+    });
+  }
+
+  function toggleMoreLess(feedback) {
+    feedback.showMore = !feedback.showMore;
+  }
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>main {
+  background-color: $light-grey;
+  min-height: 100vh;
+  margin: -10px -15px;
+}
+
+header {
+  position: relative;
+}
+
+header.top-header {
+  color: $pure-white;
+  background-color: $gable-green;
+  height: 5em;
+  text-transform: capitalize;
+}
+
+header.btn-header {
+  background-color: $cruise;
+  padding: 0.3em 0;
+  height: 5em;
+}
+
+.box-left {
+  position: absolute;
+  top: 0em;
+  left: 5vw;
+  height: 10em;
+  z-index: 100;
+}
+
+.box-right {
+  position: absolute;
+  top: 0.5em;
+  right: 5vw;
+  z-index: 100;
+}
+
+.score-label {
+  height: 10em;
+  width: 10em;
+  color: $pure-white;
+  background-color: $ocean-spray;
+  padding: 0.15em;
+  text-align: center;
+  display: inline-block;
+}
+
+.text-large {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.text-xl {
+  font-size: 3em;
+}
+
+.text-xxl {
+  font-size: 5em;
+  line-height: 0.75em;
+}
+
+.box-employee {
+  text-align: center;
+}
+
+.img-photo {
+  width: 7.5em;
+  height: 7.5em;
+  border-radius: 50%;
+  background-color: $medium-grey;
+  border: 0.5em solid $pure-white;
+}
+
+.user-label {
+  width: 7.5em;
+  height: 7.5em;
+  border-radius: 50%;
+  background-color: $medium-grey;
+  border: 0.5em solid $pure-white;
+  text-transform: uppercase;
+  padding: 0.75em;
+  margin: 0 auto;
+}
+
+.btn-bar {
+  text-align: right;
+  padding: 1em 9vw;
+  margin: 0 8.21em;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin: 2em 3.5vw;
+}
+
+.card {
+  flex: 0 0 20vw;
+  margin: 1.4vw;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+  background-color: $pure-white;
+  position: relative;
+  max-width: 20vw;
+  max-height: 30vh;
+  overflow-y: auto;
+}
+
+.card .text {
+  padding: 20px;
+  font-size: 1.25em;
+}
+
+.card em {
+  color: $medium-grey;
+  text-transform: capitalize;
+}
+
+@media (max-width: 960px) {
+  .card {
+    flex: 0 0 27vw;
+    max-width: 27vw;
+  }
+}
+
+@media (max-width: 720px) {
+  .card {
+    flex: 0 0 40vw;
+    max-width: 40vw;
+  }
+
+  .score-label {
+    width: 7em;
+  }
+
+  .btn-bar {
+    text-align: center;
+    padding: 1em 1vw;
+  }
+}
+
+@media (max-width: 540px) {
+  .card {
+    flex: 0 0 80vw;
+    max-width: 80vw;
+  }
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>peer_scorecard</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Peer Scorecard</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  var peerReviewUtils = new PeerReview();
+  var currentUserId;
+
+  // set the user sys_id to get data for
+  currentUserId = gs.getUserID() + '';
+
+  // add to data
+  data.user = peerReviewUtils.getUserData(currentUserId);
+  data.currentScore = peerReviewUtils.getUserScore(currentUserId);
+  data.feedbackList = peerReviewUtils.getFeedbackList(currentUserId);
+
+  // add the submit feedback form widget
+  data.feedbackWidget = $sp.getWidget('peer_feedback', {});
+
+  // get inspired
+  data.quotes = peerReviewUtils.getQuotes();
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-05-07 20:29:44</sys_created_on>
+        <sys_id>cc3d7dc32f205010e5ddad6df699b6af</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Peer Scorecard</sys_name>
+        <sys_package display_value="Peer Review" source="x_352973_peer_revi">e9333675db50101033361461399619c9</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Peer Review">e9333675db50101033361461399619c9</sys_scope>
+        <sys_update_name>sp_widget_cc3d7dc32f205010e5ddad6df699b6af</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-05-07 20:40:13</sys_updated_on>
+        <template><![CDATA[<main>
+  <header class="top-header">
+    <div class="box-left">
+      <div class="score-label">
+        <div class="text-xl">N P S</div>
+        <div class="text-xxl">{{c.data.currentScore.fields.nps.value}}</div>
+      </div>
+    </div>
+    <div class="box-right box-employee">
+      <div>
+        {{c.data.user.fields.name.display_value}}
+      </div>
+      <img
+        class="img-photo"
+        src="/sys_attachment.do?sys_id={{c.data.user.fields.photo.value}}"
+        alt="{{c.data.user.initials}}"
+        ng-if="c.data.user.fields.photo.value"
+      />
+      <div class="user-label" ng-if="!c.data.user.fields.photo.value">
+        <div class="text-xl">
+          {{c.data.user.initials}}
+        </div>
+      </div>
+    </div>
+  </header>
+  <header class="btn-header">
+    <div class="btn-bar">
+      <button class="btn btn-default" ng-click="c.openFeedbackModal()">
+        <i class="fa fa-paper-plane"></i>
+        ${Submit Feedback}
+      </button>
+    </div>
+  </header>
+  <section class="cards">
+    <article class="card" ng-if="c.data.quotes">
+      <div class="text">
+        <p>
+          ${Quote}:
+        </p>
+        <p>
+          {{c.data.quotes.content}}
+        </p>
+        <em>~ {{c.data.quotes.author}}</em>
+      </div>
+    </article>
+    <article class="card" ng-repeat="feedback in c.data.feedbackList">
+      <div class="text">
+        <p ng-show="!feedback.showMore">
+          "{{feedback.answer_short}}"
+          <a
+            href="javascript:void(0);"
+            ng-if="feedback.answer_full.length > c.maxDisplayLength"
+            ng-click="c.toggleMoreLess(feedback)"
+            >${more}</a
+          >
+        </p>
+        <p ng-show="feedback.showMore">
+          "{{feedback.answer_full}}"
+          <a href="javascript:void(0);" ng-click="c.toggleMoreLess(feedback)">less</a>
+        </p>
+        <em>~ {{feedback.fields.submitter.display_value}}</em>
+      </div>
+    </article>
+  </section>
+</main>
+<script type="text/ng-template" id="submitFeedbackModalTemplate">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">Submit Peer Review Feedback</h4>
+  </div>
+    <div class="panel-body">
+      <sp-widget widget="data.feedbackWidget"></sp-widget>
+  </div>
+  </div>
+</script>]]></template>
+    </sp_widget>
+</record_update>

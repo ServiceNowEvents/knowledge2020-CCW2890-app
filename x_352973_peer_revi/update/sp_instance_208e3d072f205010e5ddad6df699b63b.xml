@@ -11,22 +11,22 @@
         <short_description/>
         <size>md</size>
         <sp_column display_value="1">da39edc72fec1010e5ddad6df699b609</sp_column>
-        <sp_widget display_value="HTML">8679ef89cb21120000f8d856634c9c4f</sp_widget>
+        <sp_widget display_value="Peer Scorecard">cc3d7dc32f205010e5ddad6df699b6af</sp_widget>
         <sys_class_name>sp_instance</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2020-05-07 19:05:12</sys_created_on>
-        <sys_id>79d9610b2fec1010e5ddad6df699b696</sys_id>
+        <sys_created_on>2020-05-07 20:35:30</sys_created_on>
+        <sys_id>208e3d072f205010e5ddad6df699b63b</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name/>
         <sys_package display_value="Peer Review" source="x_352973_peer_revi">e9333675db50101033361461399619c9</sys_package>
         <sys_policy/>
         <sys_scope display_value="Peer Review">e9333675db50101033361461399619c9</sys_scope>
-        <sys_update_name>sp_instance_79d9610b2fec1010e5ddad6df699b696</sys_update_name>
+        <sys_update_name>sp_instance_208e3d072f205010e5ddad6df699b63b</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-05-07 19:05:12</sys_updated_on>
+        <sys_updated_on>2020-05-07 20:35:30</sys_updated_on>
         <title/>
         <url/>
         <widget_parameters/>
     </sp_instance>
-    <sys_translated_text action="delete_multiple" query="documentkey=79d9610b2fec1010e5ddad6df699b696"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=208e3d072f205010e5ddad6df699b63b"/>
 </record_update>

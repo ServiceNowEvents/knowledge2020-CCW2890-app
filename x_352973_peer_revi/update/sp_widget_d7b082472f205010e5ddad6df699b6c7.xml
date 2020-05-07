@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function FeedbackController($scope) {
+  var c = this;
+  c.closeWindow = closeWindow;
+  c.submitFeedback = submitFeedback;
+
+  c.$onInit = function() {
+    c.message = '';
+    c.messageType = '';
+    c.submitting = false;
+    setRefUser();
+  };
+
+  function closeModal() {
+    $rootScope.$broadcast('peer_feedback_close');
+  }
+
+  function closeWindow() {
+    closeModal();
+
+    // clean data for next use
+    c.data.score = 0;
+    c.data.question = '';
+    $scope.refUser = {
+      value: null,
+      name: null
+    };
+  }
+
+  function setRefUser() {
+   $scope.refUser = {
+      displayValue: null,
+      value: null,
+      name: null
+    };
+  }
+
+  function submitFeedback() {
+    var params = {
+      action: 'submitFeedback',
+      userId: $scope.refUser.value,
+      score: c.data.score,
+      question: c.data.question
+    };
+
+    // call the server to perform the reassignment
+    c.server.get(params).then(function(response) {
+
+      // TODO: check for valid response before closing
+      if (response.data.submitResult) {
+        c.message = 'Feedback was successfully submitted. Thank you for the feedback!';
+        c.messageType = 'success';
+        closeModal();
+      } else {
+        c.message =
+          'There was a problem with submitting the feedback! Please contact your administrator for assistance.';
+        c.messageType = 'danger';
+      }
+    });
+  }
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.row {
+  margin: 1em;
+}
+
+.slider-row {
+  margin: 0 0.8em 3em 0.8em;
+}
+
+.green {
+  color: #009900;
+}
+
+div.tooltip .tooltip-arrow {
+  border-bottom-color: #dcdcdc;
+}
+
+div.tooltip div.tooltip-inner {
+  background-color: #dcdcdc;
+  color: #717171;
+}
+
+.form-group button {
+  margin-left: 0.5em;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>peer_feedback</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>Peer Feedback</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  var peerReviewUtils = new PeerReview();
+  var currentUserId;
+
+  data.score = 0;
+  data.question = null;
+
+  // set the user sys_id to get data for
+  currentUserId = gs.getUserID() + '';
+
+  // add to data
+  data.user = peerReviewUtils.getUserData(currentUserId);
+
+  // handle submitting new feedback
+  if (input && input.action == 'submitFeedback') {
+    data.submitResult = peerReviewUtils.insertFeedback({
+      score: input.score,
+      submitter: data.user.sys_id,
+      receiver: input.userId,
+      question: input.question
+    });
+  }
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-05-07 20:45:15</sys_created_on>
+        <sys_id>d7b082472f205010e5ddad6df699b6c7</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Peer Feedback</sys_name>
+        <sys_package display_value="Peer Review" source="x_352973_peer_revi">e9333675db50101033361461399619c9</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Peer Review">e9333675db50101033361461399619c9</sys_scope>
+        <sys_update_name>sp_widget_d7b082472f205010e5ddad6df699b6c7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-05-07 20:48:38</sys_updated_on>
+        <template><![CDATA[<div class="alert alert-{{c.messageType}}" ng-if="c.message">
+  {{c.message}}
+</div>
+<div class="row">
+  <div class="form-group">
+    <label class="control-label">${Submitted by}:</label>
+    <div><strong>{{::c.data.user.fields.name.display_value}}</strong></div>
+  </div>
+  <div class="form-group">
+    <label class="control-label">
+      <span class="text text-default" ng-class="{'text-danger': !refUser.value}">*</span>
+      ${Feedback for}:</label
+    >
+    <sn-record-picker
+      ng-required="!refUser.value"
+      field="refUser"
+      placeholder="'John Doe' or 'john.doe@ibm.com'"
+      table="'sys_user'"
+      display-field="'name'"
+      display-fields="'email'"
+      value-field="'sys_id'"
+      search-fields="'name,email'"
+      default-query="data.userQuery"
+      page-size="25"
+    ></sn-record-picker>
+  </div>
+  <div class="form-group">
+    <label class="control-label"
+      >${Overall, how likely are you to recommend working with me to a friend or colleague on a
+      scale of 0-10?}</label
+    >
+    <div class="slider-row">
+      <slider
+        ng-model="c.data.score"
+        ng-model-options="{getterSetter: true}"
+        min="0"
+        max="10"
+        step="1"
+        orientation="horizontal"
+        tooltip="always"
+        handle="round"
+        reversed="false"
+        slider-tooltip-position="bottom"
+        on-stop-slide="updateScore('call')"
+        on-slide="updateScore('call')"
+      />
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label">
+      <span class="text text-default" ng-class="{'text-danger': !c.data.question}">*</span>
+      ${What is the primary reason for the number you gave?}</label
+    >
+    <textarea
+      class="form-control"
+      ng-required="!c.data.question"
+      ng-model="c.data.question"
+    ></textarea>
+  </div>
+  <div class="form-group pull-right">
+    <button
+      type="button"
+      class="btn btn-default"
+      ng-click="c.closeWindow()"
+      ng-disabled="c.submitting"
+    >
+      ${Cancel}
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      ng-click="c.submitFeedback()"
+      ng-disabled="!c.data.question || !refUser.value || c.submitting"
+    >
+      ${Submit Feedback}
+    </button>
+  </div>
+  <div class="pull-right" ng-if="c.submitting">
+    <small><em>Submitting...</em></small>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>
