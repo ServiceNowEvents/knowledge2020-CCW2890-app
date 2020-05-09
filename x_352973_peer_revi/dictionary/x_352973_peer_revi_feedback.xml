@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Feedback" max_length="40" name="x_352973_peer_revi_feedback" sizeclass="0" type="collection">
+    <element label="Feedback" max_length="40" name="x_352973_peer_revi_feedback" sizeclass="1" type="collection">
         <element attributes="edge_encryption_enabled=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
         <element attributes="edge_encryption_enabled=true" label="What is the primary reason for the number you gave?" max_length="200" name="question" type="string"/>
         <element attributes="edge_encryption_enabled=true,encode_utf8=false" label="Receiver" max_length="32" name="receiver" reference="sys_user" type="reference"/>
